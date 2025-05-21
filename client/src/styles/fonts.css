@@ -1,3 +1,11 @@
+/**
+ * Fonts
+ * @description This file contains the font-face declarations for the Boston Liquor License Tracker.
+ * When adding a new font, please ensure that:
+ *   1. Both .woff and .woff2 files are included to support all browsers.
+ *   2. The font files include both Latin and Latin-Extended characters so that we can support Vietnamese characters.
+ */
+
 /* roboto-300 - latin */
 @font-face {
   font-display: swap;
