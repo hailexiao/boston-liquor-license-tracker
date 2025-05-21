@@ -10,6 +10,9 @@ import I18n from "./i18n/I18n";
 // Global styles
 import "@styles/index.css";
 
+// Fonts
+import "@styles/fonts.css";
+
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
