@@ -2,7 +2,7 @@ import { FormattedMessage } from "react-intl";
 import "./header.css";
 
 // TODO: Replace with actual logic for getting the next meeting date
-const nextMeetingDate = new Date("2025-06-05T10:00:00Z"); // Example date, replace with actual logic
+const nextMeetingDate = null;
 
 const Header = () => {
   // Show the next meeting date if and only if we have one and it is in the future
