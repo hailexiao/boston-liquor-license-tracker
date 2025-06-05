@@ -3,7 +3,6 @@
     background-color: var(--primary-background-color-gray);
     color: var(--primary-text-color-white);
     padding-inline: 2rem;
-    height: 225px;
 
     .text-container {
       max-width: 1440px;
