@@ -35,7 +35,7 @@ async function main() {
       fileName: null,
       message: String(err),
     };
-    console.log("::JSON_OUTPUT::" + JSON.stringify(errResult));
+    console.error("::JSON_OUTPUT::" + JSON.stringify(errResult));
     throw err;
   }
 }
