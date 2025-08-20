@@ -18,26 +18,15 @@ async function main() {
   // and log structured JSON output for liqour-license-applicant-pipeline workflow.
   const url =
     "https://www.boston.gov/departments/licensing-board/licensing-board-information-and-members";
-  try {
-    const pdfDate = await getLatestDate(url);
-    const fileName = await downloadVotingMinutes(pdfDate, url);
-    const result = {
-      success: true,
-      pdfDate: pdfDate.toISOString(),
-      fileName: fileName,
-      message: "Downloaded the pdf successfully",
-    };
-    console.log("::JSON_OUTPUT::" + JSON.stringify(result));
-  } catch (err) {
-    const errResult = {
-      success: false,
-      pdfDate: null,
-      fileName: null,
-      message: String(err),
-    };
-    console.error("::JSON_OUTPUT::" + JSON.stringify(errResult));
-    throw err;
-  }
+  const pdfDate = await getLatestDate(url);
+  const fileName = await downloadVotingMinutes(pdfDate, url);
+  const result = {
+    success: true,
+    pdfDate: pdfDate.toISOString(),
+    fileName: fileName,
+    message: "Downloaded the pdf successfully",
+  };
+  console.log("::JSON_OUTPUT::" + JSON.stringify(result));
 }
 
 async function downloadVotingMinutes(
