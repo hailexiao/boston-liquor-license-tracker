@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import styles from "@/components/layout/header.module.css";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import LangSwitcher from "@/i18n/lang-switcher";
 import language from "@/assets/language.svg";
 import logoDefault from "@/assets/logo.svg";
@@ -10,9 +10,7 @@ import logoPressed from "@/assets/logo_pressed.svg";
 
 const Spacer = () => <span className="mx-4 text-gray-400">&bull;</span>;
 
-const LineSpacer = () => (
-  <div className="w-[160px] h-px bg-gray-300 mx-4" />
-);
+const LineSpacer = () => <div className="w-[160px] h-px bg-gray-300 mx-4" />;
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +25,10 @@ const Header = () => {
   const logoSrc = isHovered
     ? logoHover
     : logoClicked
-    ? logoPressed
-    : logoDefault;
+      ? logoPressed
+      : logoDefault;
+
+  const intl = useIntl();
 
   return (
     <header className={`${styles.siteHeader} bg-dark shadow-md sticky top-0 left-0 w-full z-50`}>
@@ -44,23 +44,29 @@ const Header = () => {
             <img
               className={styles.logoImage}
               src={logoSrc}
-              alt="Logo"
+              alt={intl.formatMessage({ id: "header.logo" })}
             />
           </Link>
 
           <div className="hidden md:flex items-center w-full">
             <Spacer />
-            <Link to="/maps"><FormattedMessage id="header.maps" /></Link>
+            <Link to="/maps">
+              <FormattedMessage id="header.maps" />
+            </Link>
             <Spacer />
-            <Link to="/database"><FormattedMessage id="header.database" /></Link>
+            <Link to="/database">
+              <FormattedMessage id="header.database" />
+            </Link>
             <Spacer />
-            <Link to="/resources"><FormattedMessage id="header.resources" /></Link>
+            <Link to="/resources">
+              <FormattedMessage id="header.resources" />
+            </Link>
 
             <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center">
               <img
                 src={language}
                 className={`${styles.languageIcon} inline-block size-[20px] text-white m-0 `}
-                alt="Language"
+                alt={intl.formatMessage({ id: "header.language" })}
               />
               <LangSwitcher />
             </div>
@@ -93,7 +99,7 @@ const Header = () => {
             <img
               src={language}
               className={`${styles.languageIcon} inline-block me-2`}
-              alt="Language"
+              alt={intl.formatMessage({ id: "header.language" })}
             />
             <LangSwitcher />
           </div>

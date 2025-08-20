@@ -1,11 +1,12 @@
-import { ExtraWork } from "@/data/extra-work-data"
+import { ExtraWork } from "@/data/extra-work-data";
+import { useIntl } from "react-intl";
 
 interface ExtraWorkCardProps {
-  item: ExtraWork
+  item: ExtraWork;
 }
 
-
 const ExtraWorkCard = ({ item }: ExtraWorkCardProps) => {
+  const intl = useIntl();
   return (
     <div className="shrink-0 size-[320px] rounded-[9px] bg-black  ">
       <a
@@ -25,13 +26,16 @@ const ExtraWorkCard = ({ item }: ExtraWorkCardProps) => {
                   active:opacity-70
               `}
         style={{ backgroundImage: `url(${item.imgSrc})` }}
+        title={intl.formatMessage({ id: item.alt })}
       >
-        <p className={`text-[24px] text-shadow-lg font-semibold ${item.textColor === "light" ? "text-black" : "text-white"}`}>
+        <p
+          className={`text-[24px] text-shadow-lg font-semibold ${item.textColor === "light" ? "text-black" : "text-white"}`}
+        >
           {item.title}
         </p>
       </a>
     </div>
-  )
-}
+  );
+};
 
-export default ExtraWorkCard
+export default ExtraWorkCard;
