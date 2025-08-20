@@ -27,10 +27,10 @@ jobs:
           node-version: lts/*
           cache: "npm"
           cache-dependency-path: scripts/package-lock.json
-      
+
       - name: Install dependencies
         working-directory: ./scripts
-        run: npm ci 
+        run: npm ci
 
       - name: Compile get voting minutes
         working-directory: ./scripts
@@ -43,6 +43,7 @@ jobs:
           OUTPUT=$(node getVotingMinutes.js 2>&1 | tee /dev/stderr)
           SEL_OUTPUT=$(echo "$OUTPUT" | grep "::JSON_OUTPUT::" | sed 's/::JSON_OUTPUT:://')
           SUCCESS=$(echo "$SEL_OUTPUT" | jq -r '.success')
+          echo "Output: $OUTPUT"
           if [ "$SUCCESS" != "true" ]; then
             echo "Script failed : $(echo "$SEL_OUTPUT" | jq -r '.message')"
             exit 1 
@@ -51,27 +52,27 @@ jobs:
           VOTING_DATE=$(echo "$SEL_OUTPUT" | jq -r '.pdfDate')
           echo "pdf_file=$PDF_FILE" >> $GITHUB_OUTPUT
           echo "voting_date=$VOTING_DATE" >> $GITHUB_OUTPUT
- 
-      - name: Setup python 
+
+      - name: Setup python
         uses: actions/setup-python@v5
-        with: 
-          python-version: '3.13'
-          cache: 'pip'
-        
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
       - name: Install Python dependencies
         working-directory: ./scripts
         run: pip install -r requirements.txt
 
-      - name: Run python script 
+      - name: Run python script
         working-directory: ./scripts
         run: python3 extract_entity.py ${{ steps.generate.outputs.pdf_file}}
-      
-      - name: Compile update processed date 
+
+      - name: Compile update processed date
         working-directory: ./scripts
         run: npx tsc -t es2022 -m nodenext updateLastProcessedDate.ts
 
-      - name: Run update processed date 
-        working-directory: ./scripts 
+      - name: Run update processed date
+        working-directory: ./scripts
         run: node updateLastProcessedDate.js ${{ steps.generate.outputs.voting_date}}
 
       - name: Create pull request to merge in new next meeting date
