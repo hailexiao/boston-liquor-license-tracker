@@ -59,7 +59,7 @@ const Header = () => {
             </Link>
             <Spacer />
             <Link to="/resources">
-              <FormattedMessage id="header.resources" />
+              <FormattedMessage id="ui.resources" />
             </Link>
 
             <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center">
@@ -93,7 +93,7 @@ const Header = () => {
           </Link>
           <LineSpacer />
           <Link to="/resources" className="py-[8px] px-[24px] block">
-            <FormattedMessage id="header.resources" />
+            <FormattedMessage id="ui.resources" />
           </Link>
           <div className="py-[16px] px-[24px] pb-[8px] ms-auto">
             <img
